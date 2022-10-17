@@ -9,7 +9,7 @@ app = FastAPI()
 def root():
     return "This is an API for return a random password"
 @app.post("/passwords")
-def generate_password(password_request: PasswordRequest):
+def generate_passwords(password_request: PasswordRequest):
     passwordArray = []
     allowableCharacter = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     allowableCharacter += allowableCharacter
@@ -21,3 +21,7 @@ def generate_password(password_request: PasswordRequest):
             password += random.choice(allowableCharacter)
         passwordArray.append(password)
     return passwordArray
+@app.get("/passwords")
+def generate_password():
+    tempPasswordRequest =  PasswordRequest()
+    return generate_passwords(tempPasswordRequest)
